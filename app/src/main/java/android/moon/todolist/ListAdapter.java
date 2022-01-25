@@ -4,9 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -14,15 +15,26 @@ import java.util.ArrayList;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private ArrayList<String> mData = null;
+
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView1 ;
 
         ViewHolder(View itemView) {
             super(itemView) ;
-
             // 뷰 객체에 대한 참조. (hold strong reference)
             textView1 = itemView.findViewById(R.id.item) ;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if(mListener != null){
+                            mListener.onItemCLick(view,pos);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -54,5 +66,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return mData.size() ;
+    }
+
+    //이벤트 리스너(클릭)
+    public interface onItemClickListener{
+        void onItemCLick(View v, int position);
+    }
+
+    private onItemClickListener mListener = null;
+    public void setOnItemClickListener(onItemClickListener listener){
+        this.mListener = listener;
     }
 }
