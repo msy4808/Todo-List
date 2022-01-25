@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ListAdapter(str_list);
         adapter.setOnItemClickListener(new ListAdapter.onItemClickListener() {
             @Override
-            public void onItemCLick(View v, int position) {
+            public void onItemCLick(View v, int position) { //확인 눌렀을때 데이터 삭제
                 new AlertDialog.Builder(MainActivity.this) // TestActivity 부분에는 현재 Activity의 이름 입력.
                         .setMessage(str_list.get(position) + " 를 삭제하시겠습니까?")     // 제목 부분 (직접 작성)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
@@ -43,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void enterClick(View v){
+    public void enterClick(View v){ //엔터키 눌렸을때 실행되도록 추가
         String str = in.getText().toString();
         str_list.add(str);
         RecyclerView viewlist = findViewById(R.id.list);
         viewlist.setLayoutManager(new LinearLayoutManager(this));
         viewlist.setAdapter(adapter);
+        in.setText("");
     }
 }
