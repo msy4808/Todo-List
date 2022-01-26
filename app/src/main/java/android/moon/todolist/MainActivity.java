@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TextInputEditText in;
     ArrayList<String> str_list = new ArrayList<String>();
     ListAdapter adapter;
+    RecyclerView viewlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(str_list.get(position) + " 를 삭제하시겠습니까?")     // 제목 부분 (직접 작성)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {      // 버튼1 (직접 작성)
                             public void onClick(DialogInterface dialog, int which){
-                                Toast.makeText(getApplicationContext(), "확인 누름", Toast.LENGTH_SHORT).show(); // 실행할 코드
+                                str_list.remove(position);
+                                viewlist.setAdapter(adapter);
+                                Toast.makeText(getApplicationContext(), "삭제하였습니다", Toast.LENGTH_SHORT).show(); // 실행할 코드
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {     // 버튼2 (직접 작성)
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public void enterClick(View v){ //엔터키 눌렸을때 실행되도록 추가
         String str = in.getText().toString();
         str_list.add(str);
-        RecyclerView viewlist = findViewById(R.id.list);
+        viewlist = findViewById(R.id.list);
         viewlist.setLayoutManager(new LinearLayoutManager(this));
         viewlist.setAdapter(adapter);
         in.setText("");
