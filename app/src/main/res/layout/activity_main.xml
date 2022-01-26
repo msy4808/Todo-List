@@ -42,7 +42,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="4"
-            android:onClick="enterClick"
+            android:onClick="btnClick"
             android:text="입력" />
 
     </LinearLayout>
