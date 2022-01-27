@@ -19,7 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity { //쉐이드프리퍼런스가 아닌 DB사용예정
+public class MainActivity extends AppCompatActivity { //현재시간을 조회해서 00시가 넘어가면 앱을 실행할떄 테이블 초기화
     TextInputEditText in;
     ArrayList<String> str_list = new ArrayList<String>();
     ListAdapter adapter;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity { //쉐이드프리퍼런스
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SQLiteDatabase db;
+        SQLiteDatabase db;clear
         helper = new DBHelper(MainActivity.this, "todo.db", null, 1);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
