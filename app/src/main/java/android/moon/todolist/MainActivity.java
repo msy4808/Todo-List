@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity { //현재시간을 조회�
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SQLiteDatabase db;clear
+        SQLiteDatabase db;
         helper = new DBHelper(MainActivity.this, "todo.db", null, 1);
         db = helper.getWritableDatabase();
         helper.onCreate(db);
